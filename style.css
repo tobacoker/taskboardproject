@@ -1,0 +1,76 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    background-color: #c7dff7;
+}
+
+header {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.swim-lanes {
+    min-height: 60vh;
+    margin-top: 20px;
+}
+
+.lane {
+    background-color: #ffffff;
+}
+
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #ffffff;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+
+
+.task-card {
+    margin: 0 auto;
+}
+
+.task-card:hover {
+    cursor: pointer;
+    color: aqua;
+    scale: (2,2);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.modal-content {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.modal-header {
+    border-bottom: 1px solid #ced4da;
+}
+
+.modal-footer {
+    border-top: 1px solid #ced4da;
+}
+
+@media (max-width: 768px) {
+    .lane {
+        margin-bottom: 20px;
+    }
+}
