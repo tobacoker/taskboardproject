@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
     let nextId = JSON.parse(localStorage.getItem("nextId")) || 1;
 
@@ -12,19 +12,19 @@ $(document).ready(function() {
         let taskId = task.id;
         let taskTitle = task.title;
         let dueDate = task.dueDate ? "Due Date: " + task.dueDate : "";
-    
+
         // Creating the task card elements
         let taskCard = $("<div>").addClass("card draggable-task").attr("id", "task-" + taskId);
         let cardBody = $("<div>").addClass("card-body").html("<strong>" + taskTitle + "</strong><br>" + dueDate);
-        
+
         // Adding a delete button to the task card
         let deleteButton = $("<button>")
             .addClass("btn btn-sm btn-danger delete-task")
             .html('<i class="fas fa-trash-alt"></i>');
-    
+
         // Appending the card body and delete button to the task card
         taskCard.append(cardBody, deleteButton);
-    
+
         // Making the task card draggable
         taskCard.draggable({
             revert: "invalid",
@@ -32,9 +32,9 @@ $(document).ready(function() {
             containment: "document",
             cursor: "move"
         });
-    
+
         return taskCard;
-    
+
     }
 
     function renderTaskList() {
@@ -43,7 +43,7 @@ $(document).ready(function() {
         $("#done-cards").empty();
 
         // Sorting tasks by due date
-        taskList.sort(function(a, b) {
+        taskList.sort(function (a, b) {
             if (a.dueDate && b.dueDate) {
                 return new Date(a.dueDate) - new Date(b.dueDate);
             } else {
@@ -51,7 +51,7 @@ $(document).ready(function() {
             }
         });
 
-        taskList.forEach(function(task) {
+        taskList.forEach(function (task) {
             let taskCard = createTaskCard(task);
             $("#" + task.status + "-cards").append(taskCard);
             if (task.status === "to-do") {
@@ -76,14 +76,14 @@ $(document).ready(function() {
         };
         taskList.push(newTask);
         localStorage.setItem("tasks", JSON.stringify(taskList));
-
+    
         // Log the newly created task to the console
         console.log("Adding New Task:", newTask);
-
+    
         // Append the new task card to the appropriate column
         let taskCard = createTaskCard(newTask);
         $("#" + newTask.status + "-cards").append(taskCard);
-
+    
         // Make the new task card draggable
         taskCard.draggable({
             revert: "invalid",
@@ -91,15 +91,20 @@ $(document).ready(function() {
             containment: "document",
             cursor: "move"
         });
-
+    
         // Hide the form modal after adding the task
         $("#formModal").modal("hide");
+    
+        // Render the updated task list
+        renderTaskList();
     }
+    
+
 
     function handleDrop(event, ui) {
         let taskId = ui.draggable.attr("id").split("-")[1];
         let newStatus = $(this).attr("id");
-        taskList.forEach(function(task) {
+        taskList.forEach(function (task) {
             if (task.id == taskId) {
                 task.status = newStatus;
             }
@@ -115,7 +120,7 @@ $(document).ready(function() {
         let taskId = $(this).closest('.card').attr('id').split('-')[1];
 
         // Filter out the task with the corresponding ID from the taskList array
-        taskList = taskList.filter(function(task) {
+        taskList = taskList.filter(function (task) {
             return task.id != taskId;
         });
 
